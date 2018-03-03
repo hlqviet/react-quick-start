@@ -5,7 +5,6 @@ interface State {
 }
 interface Props {
   data: { id: number, description: string }[];
-  owner: React.Component;
   addSelectItem: (description: string) => void;
 }
 

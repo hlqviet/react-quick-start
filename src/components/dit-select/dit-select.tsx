@@ -5,14 +5,12 @@ interface State {
 }
 interface Props {
   data: { id: number, description: string }[];
-  owner: React.Component;
   deleteSelectItem: (id: number) => void;
 }
 
 export default class DitSelectComponent extends React.Component {
   public state: State;
   public props: Props;
-  private shouldUpdate: boolean = false;
 
   constructor(props: Props) {
     super(props);
@@ -21,6 +19,7 @@ export default class DitSelectComponent extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.reSelect = this.reSelect.bind(this);
   }
 
   handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
@@ -29,20 +28,12 @@ export default class DitSelectComponent extends React.Component {
 
   handleClick() {
     this.props.deleteSelectItem(parseInt(this.state.value, 10));
-
-    this.shouldUpdate = true;
   }
 
-  componentDidUpdate() {
+  reSelect() {
     if (this.props.data.length) {
       this.setState({ value: this.props.data[0].id.toString() });
-
-      this.shouldUpdate = false;
     }
-  }
-
-  shouldComponentUpdate() {
-    return this.shouldUpdate;
   }
 
   render() {

@@ -7,17 +7,18 @@ import { ditCharacteristics } from '../../data/data';
 
 interface State {
   ditCharacteristics: { id: number, description: string }[];
-  owner: React.Component;
+  shouldListUpdate: boolean;
 }
 interface Props { }
 
 export default class DitComponent extends React.Component {
   public state: State;
+  private ditSelect: DitSelect | null;
 
   constructor(props: Props) {
     super(props);
 
-    this.state = { ditCharacteristics, owner: this };
+    this.state = { ditCharacteristics, shouldListUpdate: true };
 
     this.addSelectItem = this.addSelectItem.bind(this);
     this.deleteSelectItem = this.deleteSelectItem.bind(this);
@@ -32,22 +33,36 @@ export default class DitComponent extends React.Component {
     });
 
     this.setState({ ditCharacteristics: chars });
+
+    if (this.ditSelect !== null) {
+      this.ditSelect.reSelect();
+    }
   }
 
   deleteSelectItem(id: number) {
-    const chars = this.state.ditCharacteristics.filter(item => item.id !== id);
-
     this.setState({
-      ditCharacteristics: chars
+      ditCharacteristics: this.state.ditCharacteristics.filter(item => item.id !== id),
+      shouldListUpdate: true
     });
+
+    if (this.ditSelect !== null) {
+      this.ditSelect.reSelect();
+    }
   }
 
-  render(): JSX.Element {
+  render() {
     return (
       <div>
         <List data={this.state.ditCharacteristics} />
-        <DitInput data={this.state.ditCharacteristics} owner={this} addSelectItem={this.addSelectItem} />
-        <DitSelect data={this.state.ditCharacteristics} owner={this} deleteSelectItem={this.deleteSelectItem} />
+        <DitInput
+          data={this.state.ditCharacteristics}
+          addSelectItem={this.addSelectItem}
+        />
+        <DitSelect
+          ref={(ditSelect) => this.ditSelect = ditSelect}
+          data={this.state.ditCharacteristics}
+          deleteSelectItem={this.deleteSelectItem}
+        />
       </div>
     );
   }
