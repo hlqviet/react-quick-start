@@ -13,15 +13,6 @@ jobs:
           key: node-modules-cache-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-  build:
-    docker:
-      - image: circleci/node:latest
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - node-modules-cache-{{ .Branch }}-{{ checksum "package.json" }}
-      - run: yarn build
   test:
     docker:
       - image: circleci/node:latest
@@ -31,25 +22,26 @@ jobs:
           keys:
             - node-modules-cache-{{ .Branch }}-{{ checksum "package.json" }}
       - run: yarn test
-  deploy:
+  build_deploy:
     docker:
       - image: circleci/node:latest
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - node-modules-cache-{{ .Branch }}-{{ checksum "package.json" }}
+      - run: yarn build
       - run: scp -o StrictHostKeyChecking=no -r ~/project/react-quick-start/build/* circleci@45.32.116.46:/usr/share/nginx/reactjs.blogcuaviet.com/html
 
 workflows:
   version: 2
-  build_test_deploy:
+  test_build_deploy:
     jobs:
     - dependencies
-    - build:
-        requires:
-          - dependencies
     - test:
         requires:
           - dependencies
-    - deploy:
+    - build_deploy:
         requires:
-          - build
+          - dependencies
           - test
