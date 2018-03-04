@@ -4,6 +4,10 @@ test:
   override:
     - "true"
 
+compile:
+  override:
+    - npm build
+
 deployment:
   push_to_server:
     branch: master
