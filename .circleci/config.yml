@@ -34,9 +34,10 @@ jobs:
   deploy:
     docker:
       - image: circleci/node:latest
+    working_directory: ~/project/react-quick-start
     steps:
       - checkout
-      - run: scp -o StrictHostKeyChecking=no -r react-quick-start/build/* circleci@45.32.116.46:/usr/share/nginx/reactjs.blogcuaviet.com/html
+      - run: scp -o StrictHostKeyChecking=no -r build/* circleci@45.32.116.46:/usr/share/nginx/reactjs.blogcuaviet.com/html
 
 workflows:
   version: 2
