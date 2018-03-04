@@ -2,4 +2,4 @@
 
 ---
 
-A personal React Quick Start app written in TypeScript.
+This is my first React app.
