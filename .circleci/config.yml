@@ -32,11 +32,11 @@ jobs:
             - node-modules-cache-{{ .Branch }}-{{ checksum "package.json" }}
       - run: yarn test
   deploy:
-    machine:
-        enabled: true
+    docker:
+      - image: react-quick-start
     steps:
       - checkout
-      - run: rsync -avz ~/project/react-quick-start/build/ circleci@45.32.116.46:/usr/share/nginx/reactjs.blogcuaviet.com/html/
+      - run: rsync -avz react-quick-start/build/ circleci@45.32.116.46:/usr/share/nginx/reactjs.blogcuaviet.com/html/
 
 workflows:
   version: 2
