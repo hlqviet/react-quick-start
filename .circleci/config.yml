@@ -18,12 +18,18 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - node-modules-cache-{{ .Branch }}-{{ checksum "package.json" }}
       - run: yarn build
   test:
     docker:
       - image: circleci/node:latest
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - node-modules-cache-{{ .Branch }}-{{ checksum "package.json" }}
       - run: yarn test
   deploy:
     machine:
