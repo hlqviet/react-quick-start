@@ -3,3 +3,9 @@
 test:
   override:
     - "true"
+
+deployment:
+  push_to_server:
+    branch: master
+    commands:
+      - rsync -avz react-quick-start/build/ circleci@45.32.116.46:/usr/share/nginx/reactjs.blogcuaviet.com/
