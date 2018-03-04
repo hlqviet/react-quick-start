@@ -30,3 +30,12 @@
     transform: rotate(360deg);
   }
 }
+
+.repo {
+  color: #FFF;
+  text-decoration: none;
+}
+
+.repo:hover {
+  text-decoration: underline
+}
