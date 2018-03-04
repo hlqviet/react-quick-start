@@ -6,7 +6,7 @@ test:
 
 compile:
   override:
-    - npm build
+    - npm run build
 
 deployment:
   push_to_server:
