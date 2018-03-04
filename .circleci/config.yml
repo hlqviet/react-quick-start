@@ -35,7 +35,7 @@ jobs:
     machine:
         enabled: true
     steps:
-      - run: rsync -avz ~/react-quick-start/build circleci@45.32.116.46:/usr/share/nginx/reactjs.blogcuaviet.com/html/
+      - run: rsync -avz react-quick-start/build/ circleci@45.32.116.46:/usr/share/nginx/reactjs.blogcuaviet.com/html/
 
 workflows:
   version: 2
