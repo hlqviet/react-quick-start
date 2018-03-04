@@ -1,3 +1,7 @@
+[![CircleCI](https://circleci.com/gh/S-a-l-a-d/react-quick-start/tree/master.svg?style=shield&circle-token=2d21554f885198a75a9325a10b21b21602b3bdc1)](https://circleci.com/gh/S-a-l-a-d/react-quick-start/tree/master)
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
