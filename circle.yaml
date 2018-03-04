@@ -1,0 +1,5 @@
+# circle.yaml
+
+test:
+  override:
+    - "true"
