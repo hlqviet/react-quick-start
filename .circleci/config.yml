@@ -33,7 +33,7 @@ jobs:
       - run: yarn test
   deploy:
     docker:
-      - image: react-quick-start
+      - image: circleci/node:latest
     steps:
       - checkout
       - run: rsync -avz react-quick-start/build/ circleci@45.32.116.46:/usr/share/nginx/reactjs.blogcuaviet.com/html/
