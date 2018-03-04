@@ -1,8 +1,8 @@
 # circle.yml
 
-test:
-  override:
-    - "true"
+machine:
+  node:
+    version: latest
 
 compile:
   override:
