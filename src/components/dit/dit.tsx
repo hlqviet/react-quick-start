@@ -13,7 +13,7 @@ interface Props { }
 
 export default class DitComponent extends React.Component {
   public state: State;
-  private ditSelect: DitSelect | null;
+  private ditSelect: DitSelect;
 
   constructor(props: Props) {
     super(props);
@@ -33,10 +33,7 @@ export default class DitComponent extends React.Component {
     });
 
     this.setState({ ditCharacteristics: chars });
-
-    if (this.ditSelect !== null) {
-      this.ditSelect.reSelect();
-    }
+    this.ditSelect.reSelect();
   }
 
   deleteSelectItem(id: number) {
@@ -44,10 +41,7 @@ export default class DitComponent extends React.Component {
       ditCharacteristics: this.state.ditCharacteristics.filter(item => item.id !== id),
       shouldListUpdate: true
     });
-
-    if (this.ditSelect !== null) {
-      this.ditSelect.reSelect();
-    }
+    this.ditSelect.reSelect();
   }
 
   render() {
@@ -59,7 +53,7 @@ export default class DitComponent extends React.Component {
           addSelectItem={this.addSelectItem}
         />
         <DitSelect
-          ref={(ditSelect) => this.ditSelect = ditSelect}
+          ref={(ditSelect) => { if (ditSelect !== null) { this.ditSelect = ditSelect; } }}
           data={this.state.ditCharacteristics}
           deleteSelectItem={this.deleteSelectItem}
         />
