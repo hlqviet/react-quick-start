@@ -3,6 +3,7 @@ jobs:
   dependencies:
     docker:
       - image: circleci/node:latest
+    working_directory: ~/react-quick-start
     steps:
       - checkout
       - restore_cache:
@@ -16,6 +17,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:latest
+    working_directory: ~/react-quick-start
     steps:
       - checkout
       - restore_cache:
@@ -25,6 +27,7 @@ jobs:
   test:
     docker:
       - image: circleci/node:latest
+    working_directory: ~/react-quick-start
     steps:
       - checkout
       - restore_cache:
@@ -34,9 +37,10 @@ jobs:
   deploy:
     docker:
       - image: circleci/node:latest
+    working_directory: ~/react-quick-start
     steps:
       - checkout
-      - run: scp -o StrictHostKeyChecking=no -r ~/project/build circleci@45.32.116.46:/usr/share/nginx/reactjs.blogcuaviet.com/html
+      - run: scp -o StrictHostKeyChecking=no -r build/* circleci@45.32.116.46:/usr/share/nginx/reactjs.blogcuaviet.com/html
 
 workflows:
   version: 2
