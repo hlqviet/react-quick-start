@@ -34,9 +34,9 @@ jobs:
   deploy:
     machine:
         enabled: true
-    working_directory: ~/react-quick-start
+    working_directory: ~/react-quick-start/build
     steps:
-      - run: rsync -avz ./build/ circleci@45.32.116.46:/usr/share/nginx/reactjs.blogcuaviet.com/html/
+      - run: rsync -avz . circleci@45.32.116.46:/usr/share/nginx/reactjs.blogcuaviet.com/html/
 
 workflows:
   version: 2
