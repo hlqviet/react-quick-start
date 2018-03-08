@@ -1,7 +1,7 @@
 import * as React from 'react';
 import LogicalComponent from '../logical/logical';
 
-interface ToggleButtonProps {}
+interface ToggleButtonProps { }
 interface State {
   isToggleOn: boolean;
 }
@@ -24,12 +24,12 @@ export default class ToggleButton extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         <button onClick={this.toggle.bind(this, new Date())}>
           {this.state.isToggleOn ? 'ON' : 'OFF'}
         </button>
         <LogicalComponent isToggleOn={this.state.isToggleOn} />
-      </div>
+      </>
     );
   }
 }

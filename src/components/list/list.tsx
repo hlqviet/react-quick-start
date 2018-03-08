@@ -10,14 +10,14 @@ export default class ListComponent extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         <h3>Đặc điểm của Khánh</h3>
         <ul>
           {this.props.data.map(item => (
             <ListItem key={item.id} description={item.description} />
           ))}
         </ul>
-      </div>
+      </>
     );
   }
 }

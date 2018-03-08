@@ -46,7 +46,7 @@ export default class DitComponent extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         <List data={this.state.ditCharacteristics} />
         <DitInput
           data={this.state.ditCharacteristics}
@@ -57,7 +57,7 @@ export default class DitComponent extends React.Component {
           data={this.state.ditCharacteristics}
           deleteSelectItem={this.deleteSelectItem}
         />
-      </div>
+      </>
     );
   }
 }
