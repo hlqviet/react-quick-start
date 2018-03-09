@@ -1,7 +1,7 @@
 import * as React from 'react';
 import LogicalComponent from '../logical/logical';
 
-interface ToggleButtonProps { }
+interface Props { }
 interface State {
   isToggleOn: boolean;
 }
@@ -9,7 +9,7 @@ interface State {
 export default class ToggleButton extends React.Component {
   public state: State;
 
-  constructor(props: ToggleButtonProps) {
+  constructor(props: Props) {
     super(props);
 
     this.state = { isToggleOn: false };

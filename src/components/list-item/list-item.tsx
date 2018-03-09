@@ -4,10 +4,6 @@ interface Props {
   description: string;
 }
 
-export default class ListItemComponent extends React.Component {
-  public props: Props;
-
-  render() {
-    return <li>{this.props.description}</li>;
-  }
+export default function ListItemComponent(props: Props) {
+  return <li>{props.description}</li>;
 }
