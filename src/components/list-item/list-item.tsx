@@ -25,8 +25,12 @@ export default class ListItemComponent extends React.Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
+  componentDidUpdate() {
+    if (this.input) { this.input.focus(); }
+  }
+
   handleClick(e: React.MouseEvent<HTMLLIElement>) {
-    this.setState({ isEdit: true }, () => { if (this.input) { this.input.focus(); } });
+    this.setState({ isEdit: true });
   }
 
   handleChange(e: React.ChangeEvent<HTMLInputElement>) {
