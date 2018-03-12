@@ -22,6 +22,7 @@ export default class DitComponent extends React.Component {
     this.addSelectItem = this.addSelectItem.bind(this);
     this.deleteSelectItem = this.deleteSelectItem.bind(this);
     this.updateSelectedId = this.updateSelectedId.bind(this);
+    this.updateSelectItem = this.updateSelectItem.bind(this);
   }
 
   addSelectItem(description: string) {
@@ -52,10 +53,28 @@ export default class DitComponent extends React.Component {
     this.setState({ selectedId });
   }
 
+  updateSelectItem(newItem: { id: number, description: string }) {
+    const chars = this.state.ditCharacteristics.slice();
+    const updateItem = chars.find(item => item.id === newItem.id);
+
+    if (updateItem) {
+      chars.splice(chars.indexOf(updateItem), 1, {
+        id: newItem.id, description: newItem.description
+      });
+
+      this.setState({
+        ditCharacteristics: chars
+      });
+    }
+  }
+
   render() {
     return (
       <>
-        <List data={this.state.ditCharacteristics} />
+        <List
+          data={this.state.ditCharacteristics}
+          updateSelectItem={this.updateSelectItem}
+        />
         <DitInput
           data={this.state.ditCharacteristics}
           addSelectItem={this.addSelectItem}
