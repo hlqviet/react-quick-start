@@ -5,7 +5,9 @@ interface State {
 }
 interface Props {
   data: { id: number, description: string }[];
-  deleteSelectItem: (id: number) => void;
+  deleteSelectItem: () => void;
+  selectedId: number;
+  updateSelectedId: (selectedId: number) => void;
 }
 
 export default class DitSelectComponent extends React.Component {
@@ -19,27 +21,20 @@ export default class DitSelectComponent extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.reSelect = this.reSelect.bind(this);
   }
 
   handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    this.setState({ value: e.target.value });
+    this.props.updateSelectedId(parseInt(e.target.value, 10));
   }
 
   handleClick() {
-    this.props.deleteSelectItem(parseInt(this.state.value, 10));
-  }
-
-  reSelect() {
-    if (this.props.data.length) {
-      this.setState({ value: this.props.data[0].id.toString() });
-    }
+    this.props.deleteSelectItem();
   }
 
   render() {
     return (
       <div>
-        <select value={this.state.value} onChange={this.handleChange}>
+        <select value={this.props.selectedId} onChange={this.handleChange}>
           {this.props.data.map(item =>
             <option key={item.id} value={item.id}>{item.description}</option>)}
         </select>

@@ -7,41 +7,49 @@ import { ditCharacteristics } from '../../data/data';
 
 interface State {
   ditCharacteristics: { id: number, description: string }[];
-  shouldListUpdate: boolean;
+  selectedId: number;
 }
 interface Props { }
 
 export default class DitComponent extends React.Component {
   public state: State;
-  private ditSelect: DitSelect;
 
   constructor(props: Props) {
     super(props);
 
-    this.state = { ditCharacteristics, shouldListUpdate: true };
+    this.state = { ditCharacteristics, selectedId: ditCharacteristics[0].id };
 
     this.addSelectItem = this.addSelectItem.bind(this);
     this.deleteSelectItem = this.deleteSelectItem.bind(this);
+    this.updateSelectedId = this.updateSelectedId.bind(this);
   }
 
   addSelectItem(description: string) {
-    const chars = this.state.ditCharacteristics;
+    let chars = this.state.ditCharacteristics;
 
-    chars.push({
+    chars = chars.concat([{
       id: chars.length ? chars[chars.length - 1].id + 1 : 1,
       description
-    });
+    }]);
 
-    this.setState({ ditCharacteristics: chars });
-    this.ditSelect.reSelect();
+    this.setState({
+      ditCharacteristics: chars,
+      selectedId: chars[0].id
+    });
   }
 
-  deleteSelectItem(id: number) {
-    this.setState({
-      ditCharacteristics: this.state.ditCharacteristics.filter(item => item.id !== id),
-      shouldListUpdate: true
-    });
-    this.ditSelect.reSelect();
+  deleteSelectItem() {
+    const chars = this.state.ditCharacteristics.filter(item => item.id !== this.state.selectedId);
+
+    this.setState({ ditCharacteristics: chars });
+
+    if (chars.length) {
+      this.setState({ selectedId: chars[0].id });
+    }
+  }
+
+  updateSelectedId(selectedId: number) {
+    this.setState({ selectedId });
   }
 
   render() {
@@ -53,9 +61,10 @@ export default class DitComponent extends React.Component {
           addSelectItem={this.addSelectItem}
         />
         <DitSelect
-          ref={(ditSelect) => { if (ditSelect !== null) { this.ditSelect = ditSelect; } }}
           data={this.state.ditCharacteristics}
           deleteSelectItem={this.deleteSelectItem}
+          selectedId={this.state.selectedId}
+          updateSelectedId={this.updateSelectedId}
         />
       </>
     );
