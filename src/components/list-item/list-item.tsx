@@ -18,7 +18,10 @@ export default class ListItemComponent extends React.Component {
   constructor(props: Props) {
     super(props);
 
-    this.state = { isEdit: false, value: this.props.item.description };
+    this.state = {
+      isEdit: false,
+      value: this.props.item.description
+    };
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -57,7 +60,7 @@ export default class ListItemComponent extends React.Component {
 
     return this.state.isEdit
       ? (
-        <li className="list-item">
+        <li className="list-item-editing">
           <input
             className="input-field"
             title={tooltip}

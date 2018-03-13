@@ -3,19 +3,3 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
-
-.input-field {
-  display: block;
-}
-
-.list::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-.list-item {
-  float: left;
-  clear: left;
-  cursor: pointer;
-}

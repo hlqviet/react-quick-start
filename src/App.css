@@ -39,3 +39,50 @@
 .repo:hover {
   text-decoration: underline
 }
+
+.input-field {
+  display: block;
+}
+
+.list::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.list-item {
+  float: left;
+  clear: left;
+  cursor: pointer;
+  animation: list-item-appear .25s;
+}
+
+.list-item:hover {
+  text-decoration: underline;
+}
+
+.list-item-editing {
+  float: left;
+  clear: left;
+  animation: list-item-editing-appear .25s;
+}
+
+@keyframes list-item-appear {
+  from {
+    opacity: 0;
+    margin-left: 25%;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes list-item-editing-appear {
+  from {
+    opacity: 0;
+    margin-left: -25%;
+  }
+  to {
+    opacity: 1;
+  }
+}
