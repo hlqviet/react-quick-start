@@ -75,10 +75,7 @@ export default class DitComponent extends React.Component {
           data={this.state.ditCharacteristics}
           updateSelectItem={this.updateSelectItem}
         />
-        <DitInput
-          data={this.state.ditCharacteristics}
-          addSelectItem={this.addSelectItem}
-        />
+        <DitInput addSelectItem={this.addSelectItem} />
         <DitSelect
           data={this.state.ditCharacteristics}
           deleteSelectItem={this.deleteSelectItem}

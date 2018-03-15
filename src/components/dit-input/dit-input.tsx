@@ -4,7 +4,6 @@ interface State {
   value: string;
 }
 interface Props {
-  data: { id: number, description: string }[];
   addSelectItem: (description: string) => void;
 }
 
