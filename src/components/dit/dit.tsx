@@ -11,7 +11,7 @@ interface State {
 }
 interface Props { }
 
-export default class DitComponent extends React.Component {
+export default class DitComponent extends React.PureComponent {
   public state: State;
 
   constructor(props: Props) {
@@ -28,10 +28,10 @@ export default class DitComponent extends React.Component {
   addSelectItem(description: string) {
     let chars = this.state.ditCharacteristics;
 
-    chars = chars.concat([{
-      id: chars.length ? chars[chars.length - 1].id + 1 : 1,
-      description
-    }]);
+    chars = [
+      ...chars,
+      { id: chars.length ? chars[chars.length - 1].id + 1 : 1, description }
+    ];
 
     this.setState({
       ditCharacteristics: chars,

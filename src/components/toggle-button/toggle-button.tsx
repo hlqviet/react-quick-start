@@ -6,7 +6,7 @@ interface State {
   isToggleOn: boolean;
 }
 
-export default class ToggleButton extends React.Component {
+export default class ToggleButton extends React.PureComponent {
   public state: State;
 
   constructor(props: Props) {

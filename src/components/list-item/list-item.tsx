@@ -10,7 +10,7 @@ interface State {
   value: string;
 }
 
-export default class ListItemComponent extends React.Component {
+export default class ListItemComponent extends React.PureComponent {
   public props: Props;
   public state: State;
   private input: HTMLInputElement | null;

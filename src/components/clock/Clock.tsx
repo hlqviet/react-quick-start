@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-interface ClockProps {}
+interface ClockProps { }
 interface State {
   date: Date;
 }
 
-export default class ClockComponent extends React.Component {
+export default class ClockComponent extends React.PureComponent {
   public state: State;
   private timerId: NodeJS.Timer;
 

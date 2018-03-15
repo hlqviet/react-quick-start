@@ -10,7 +10,7 @@ interface Props {
   updateSelectedId: (selectedId: number) => void;
 }
 
-export default class DitSelectComponent extends React.Component {
+export default class DitSelectComponent extends React.PureComponent {
   public state: State;
   public props: Props;
 

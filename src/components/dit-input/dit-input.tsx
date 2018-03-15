@@ -7,7 +7,7 @@ interface Props {
   addSelectItem: (description: string) => void;
 }
 
-export default class DitInputComponent extends React.Component {
+export default class DitInputComponent extends React.PureComponent {
   public state: State;
   public props: Props;
 
