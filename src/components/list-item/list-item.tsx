@@ -13,10 +13,12 @@ interface State {
 export default class ListItemComponent extends React.PureComponent {
   public props: Props;
   public state: State;
-  private input: HTMLInputElement | null;
+  private textInput: React.RefObject<HTMLInputElement>;
 
   constructor(props: Props) {
     super(props);
+
+    this.textInput = React.createRef();
 
     this.state = {
       isEdit: false,
@@ -29,7 +31,7 @@ export default class ListItemComponent extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    if (this.input) { this.input.focus(); }
+    if (this.textInput.current) { this.textInput.current.focus(); }
   }
 
   handleClick(e: React.MouseEvent<HTMLLIElement>) {
@@ -67,7 +69,7 @@ export default class ListItemComponent extends React.PureComponent {
             value={this.state.value}
             onChange={this.handleChange}
             onKeyDown={this.handleKeyDown}
-            ref={(input) => this.input = input}
+            ref={this.textInput}
           />
         </li>
       )
