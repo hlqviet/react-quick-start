@@ -35,7 +35,7 @@ jobs:
             - node-modules-cache-{{ .Branch }}-{{ checksum "package.json" }}
       - add_ssh_keys:
           fingerprints:
-            - 'b3:02:2c:23:83:bb:fd:47:50:d6:ef:c5:f7:14:57:dd'
+            - '$KEY_FINGERPRINT'
       - run: npm run build
       - run: ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
       - run: ssh $USER@$SERVER_IP 'cd $SERVER_PATH; rm -rf *'
