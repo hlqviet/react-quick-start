@@ -38,8 +38,8 @@ jobs:
             - 'd3:9b:a7:42:1f:e1:71:8b:c0:cf:b6:60:3b:26:95:2b'
       - run: npm run build
       - run: ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
-      - run: ssh $USER@$SERVER_IP 'rm -rf $SERVER_PATH/*'
-      - run: scp -r build/* $USER@$SERVER_IP:$SERVER_PATH
+      - run: ssh $USER@$SERVER_IP 'rm -rf *'
+      - run: scp -r build/* $USER@$SERVER_IP:.
 
 workflows:
   version: 2
