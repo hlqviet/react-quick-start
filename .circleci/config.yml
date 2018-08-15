@@ -2,7 +2,7 @@ version: 2
 jobs:
   dependencies:
     docker:
-      - image: circleci/node:latest
+      - image: mhart/alpine-node
     working_directory: ~/react-quick-start
     steps:
       - checkout
@@ -16,7 +16,7 @@ jobs:
             - node_modules
   test:
     docker:
-      - image: circleci/node:latest
+      - image: mhart/alpine-node
     working_directory: ~/react-quick-start
     steps:
       - checkout
@@ -26,7 +26,7 @@ jobs:
       - run: npm run test
   build_deploy:
     docker:
-      - image: circleci/node:latest
+      - image: mhart/alpine-node
     working_directory: ~/react-quick-start
     steps:
       - checkout
@@ -34,18 +34,18 @@ jobs:
           keys:
             - node-modules-cache-{{ .Branch }}-{{ checksum "package.json" }}
       - run: npm run build
-      - run: ssh-keyscan 45.32.116.46 >> ~/.ssh/known_hosts
-      - run: ssh circleci@45.32.116.46 'rm -rf /usr/share/nginx/reactjs.blogcuaviet.com/html/*'
-      - run: scp -r build/* circleci@45.32.116.46:/usr/share/nginx/reactjs.blogcuaviet.com/html
+      - run: ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
+      - run: ssh $USER@$SERVER_IP 'rm -rf $SERVER_PATH/*'
+      - run: scp -r build/* $USER@$SERVER_IP:$SERVER_PATH
 
 workflows:
   version: 2
   test_build_deploy:
     jobs:
-    - dependencies
-    - test:
-        requires:
-          - dependencies
-    - build_deploy:
-        requires:
-          - test
+      - dependencies
+      - test:
+          requires:
+            - dependencies
+      - build_deploy:
+          requires:
+            - test
